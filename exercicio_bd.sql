@@ -100,3 +100,18 @@ VALUES (12, '20221202', 21, 'maria', 'fortaleza', 'A', 'Fortaleza', 'CE', 'BR', 
 select * from tbven
 
 
+
+
+
+-- Questão 1: Apresente a query para listar o código e 
+-- o nome do vendedor com maior número de vendas (contagem) e que estas vendas estejam com status concluído.
+
+SELECT cdvdd as codigovendedor, nmvdd as nomevendedor from tbvdd where cdvdd is not null and nmvdd is not null
+group by cdvdd, nmvdd
+order by cdvdd desc
+
+-- Questão 2: Apresente a query para listar o código e o nome do produto mais vendido entre as datas 
+-- 2014-02-03 até 2018-02-02.
+
+SELECT cdpro as codigoproduto, nmpro as nomeproduto from tbpro where cdpro is not null and
+tbpro is not null group by cdpro, nmpro where dtven between 2014-02-03 to 2018-02-02
