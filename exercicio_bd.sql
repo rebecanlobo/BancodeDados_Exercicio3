@@ -122,15 +122,20 @@ tbpro is not null group by cdpro, nmpro where dtven between 2014-02-03 to 2018-0
 
 
 
-
-
-
 -- Questão 1: Apresente a query para listar o código e 
 -- o nome do vendedor com maior número de vendas (contagem) e que estas vendas estejam com status concluído.
 
-SELECT cdvdd as codigovendedor, nmvdd as nomevendedor from tbvdd where cdvdd is not null and nmvdd is not null
-group by cdvdd, nmvdd
-order by cdvdd desc
+SELECT vd.cdvdd as codigovendedor, vd.nmvdd as nomevendedor,
+count(cdven) as contagem
+from tbvdd vd
+JOIN tbven v on v.cdvdd = vd.cdvdd
+where v.stven = 1
+group by vd.cdvdd, vd.nmvdd  -- vd. é quando vc quer indicar de qual tabela é aquela 
+--coluna
+order by count(cdven) desc
+limit 1;
+
+
 
 -- Questão 2: Apresente a query para listar o código e o nome do produto mais vendido entre as datas 
 -- 2014-02-03 até 2018-02-02.
@@ -165,4 +170,3 @@ join tbdep on cddep = cddep
 SELECT cdpro as codigoproduto, nmpro as nomeproduto, canal as canalvendas, sum(qtven) as quantidade_vendas
 from tbven
 join tbpro on tbven.cdpro = tbpro.cdpro
-
